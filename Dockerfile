@@ -1,3 +1,3 @@
-FROM python:3
+FROM python:3-alpine
 COPY mycode.py /
-CMD ["python", "./mycode"]
+CMD ["python3", "./mycode"]
