@@ -1,3 +1,3 @@
 FROM python:3-alpine
-COPY mycode.py /
-CMD ["python3", "./mycode"]
+ADD 1.py /
+CMD ["python3", "./1.py"]

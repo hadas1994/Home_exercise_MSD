@@ -9,9 +9,9 @@ pipeline {
                 git 'https://github.com/hadas1994/Home_exercise_MSD.git'
             }
         }
-        stage('Run mycode') {
+        stage('Run 1') {
             steps {
-                bat 'python mycode'
+                bat 'python 1'
             }
         }
     }
