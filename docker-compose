@@ -1,0 +1,4 @@
+version: '3'
+services:
+  test3:
+    image: "test3:alpine"
