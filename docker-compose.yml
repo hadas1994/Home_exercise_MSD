@@ -1,4 +1,6 @@
 version: '3'
 services:
-  redis:
-    image: "test3:alpine"
+  web:
+    build: .
+    ports:
+     - "5000:5000"
