@@ -11,7 +11,7 @@ pipeline {
         }
         stage('Run 1') {
             steps {
-                bat 'start /min python 1.py'
+                bat 'python 1.py'
             }
         }
     }
