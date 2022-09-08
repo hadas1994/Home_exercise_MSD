@@ -1,18 +1,35 @@
 pipeline {
     agent any
-    stages {
+    environment {
+    registry = "hadas1994/my-repo"
+    registryCredential = 'docker_hub'
+    dockerImage = ''
+    }
+    stages{
         stage('checkout') {
             steps {
-                script {
-                    properties([pipelineTriggers([pollSCM('0,30 * * * *')])])
-                }
                 git 'https://github.com/hadas1994/Home_exercise_MSD.git'
             }
         }
-        stage('Run 1') {
+        stage('build and push image') {
             steps {
-                bat 'python 1.py'
+                script {
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                    docker.withRegistry('', registryCredential) {
+                    dockerImage.push()
+                    }
+                }
             }
+        }
+        stage('set version') {
+            steps {
+                bat "echo IMAGE_TAG=${BUILD_NUMBER} > .env"
+            }
+        }
+    }
+    post {
+    always {
+        bat "docker rmi $registry:$BUILD_NUMBER"
         }
     }
 }
