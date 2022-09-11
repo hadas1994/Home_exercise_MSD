@@ -32,7 +32,7 @@ pipeline {
                 echo "next version = ${NEXT_VERSION}"
             }
         }
-                stage('Scan') {
+        stage('Scan') {
             steps {
                 // Install trivy
                 sh 'curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin v0.18.3'
@@ -53,8 +53,8 @@ pipeline {
 
                 // Scan again and fail on CRITICAL vulns
                 sh 'trivy filesystem --ignore-unfixed --vuln-type os,library --exit-code 1 --severity CRITICAL ./nodejs'
-
             }
+        }
     }
     post {
     always {
