@@ -26,6 +26,14 @@ pipeline {
                 bat "echo IMAGE_TAG=${BUILD_NUMBER} > .env"
             }
         }
+        environment {
+            NEXT_VERSION = nextVersion(buildMetadata: "$env.BUILD_NUMBER")
+        }
+        stage('Hello') {
+            steps {
+                echo "next version = ${NEXT_VERSION}"
+            }
+        }
     }
     post {
     always {
