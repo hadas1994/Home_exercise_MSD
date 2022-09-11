@@ -4,6 +4,7 @@ pipeline {
     registry = "hadas1994/my-repo"
     registryCredential = 'docker_hub'
     dockerImage = ''
+    NEXT_VERSION = nextVersion(buildMetadata: "$env.BUILD_NUMBER")
     }
     stages{
         stage('checkout') {
@@ -25,9 +26,6 @@ pipeline {
             steps {
                 bat "echo IMAGE_TAG=${BUILD_NUMBER} > .env"
             }
-        }
-        environment {
-            NEXT_VERSION = nextVersion(buildMetadata: "$env.BUILD_NUMBER")
         }
         stage('Hello') {
             steps {
